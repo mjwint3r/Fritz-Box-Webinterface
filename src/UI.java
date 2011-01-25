@@ -1,6 +1,12 @@
 import java.io.*;
 import java.net.MalformedURLException;
 
+/**
+ * The class {@code UI} represents the user interface.
+ * 
+ * @author moritz
+ * 
+ */
 public class UI {
     private static Connection con;
     private static BufferedReader in = new BufferedReader(

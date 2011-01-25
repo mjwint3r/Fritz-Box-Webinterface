@@ -4,11 +4,26 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * The class {@code Connection} represents a Connection to a website.
+ * 
+ * @author moritz
+ * 
+ */
 public class Connection {
     public Connection() {
 
     }
 
+    /**
+     * Returns the html-sourcecode from the website at url.
+     * 
+     * @param url
+     *            the specified URL
+     * @return the html-sourcecode
+     * @throws MalformedURLException
+     * @throws IOException
+     */
     public String getSite(String url) throws MalformedURLException, IOException {
 	String code = "";
 	InputStream is = null;
@@ -23,4 +38,5 @@ public class Connection {
 
 	return code;
     }
+
 }
