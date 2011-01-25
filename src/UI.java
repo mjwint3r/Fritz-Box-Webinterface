@@ -3,7 +3,8 @@ import java.net.MalformedURLException;
 
 public class UI {
     private static Connection con;
-    private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader in = new BufferedReader(
+	    new InputStreamReader(System.in));
 
     public static void main(String[] args) {
 	boolean running = true;
@@ -17,7 +18,11 @@ public class UI {
 		running = false;
 	    } else {
 		try {
-		    System.out.println(con.getSite("http://" + input));
+		    if (input.substring(0, 7).equals("http://")) {
+			System.out.println(con.getSite(input));
+		    } else {
+			System.out.println(con.getSite("http://" + input));
+		    }
 		} catch (MalformedURLException e) {
 		    System.out.println("Falsche Eingabe");
 		} catch (IOException e) {
@@ -27,23 +32,22 @@ public class UI {
 	}
 
     }
-    
+
     public static String askString(String prompt) {
-        System.out.print(prompt);
-        return readString();
+	System.out.print(prompt);
+	return readString();
     }
-    
+
     public static String readString() {
-        try {
-            return in.readLine();
-        } catch (IOException e) {
-            throw new Error(e);
-        }
+	try {
+	    return in.readLine();
+	} catch (IOException e) {
+	    throw new Error(e);
+	}
     }
-    
+
     public static String ask(String prompt) {
-        return askString(prompt);
+	return askString(prompt);
     }
-    
-    
+
 }

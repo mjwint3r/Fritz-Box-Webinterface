@@ -14,7 +14,7 @@ public class Connection {
 	InputStream is = null;
 
 	URL url2 = new URL(url);
-	is = url2.openStream();
+	is = url2.openStream(); // = openConnection().getInputStream();
 	code = new Scanner(is).useDelimiter("\\Z").next();
 
 	if (is != null) {
