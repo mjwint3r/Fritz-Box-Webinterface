@@ -11,8 +11,98 @@ import java.util.Scanner;
  * 
  */
 public class Connection {
-    public Connection() {
+    
+    private String loginActionName;
+    private String loginUserNameParameter;
+    private String loginPasswordParameterName;
+    
+    private String loginUserName;
+    private String loginPassword;
+    
+    private URL targetURL;
+    
+    public Connection(String loginActionName, String loginUserNameParameter,
+	    String loginPasswordParameterName, String loginUserName,
+	    String loginPassword, String url) throws MalformedURLException {
+	this.loginActionName = loginActionName;
+	this.loginUserNameParameter = loginUserNameParameter;
+	this.loginPasswordParameterName = loginPasswordParameterName;
+	this.loginUserName = loginUserName;
+	this.loginPassword = loginPassword;
+	this.setTargetURL(url);
+    }
+    
+    public Connection(String loginActionName, String loginUserNameParameter,
+	    String loginPasswordParameterName, String loginUserName,
+	    String loginPassword) {
+	this.loginActionName = loginActionName;
+	this.loginUserNameParameter = loginUserNameParameter;
+	this.loginPasswordParameterName = loginPasswordParameterName;
+	this.loginUserName = loginUserName;
+	this.loginPassword = loginPassword;
+	this.targetURL = null;
+    }
 
+    public Connection() {
+	this.loginActionName = "";
+	this.loginUserNameParameter = "";
+	this.loginPasswordParameterName = "";
+	this.loginUserName = "";
+	this.loginPassword = "";
+	this.targetURL = null;
+    }
+    
+    
+    public String getLoginActionName() {
+        return this.loginActionName;
+    }
+
+    public void setLoginActionName(String loginActionName) {
+        this.loginActionName = loginActionName;
+    }
+
+    public String getLoginUserNameParameter() {
+        return this.loginUserNameParameter;
+    }
+
+    public void setLoginUserNameParameter(String loginUserNameParameter) {
+        this.loginUserNameParameter = loginUserNameParameter;
+    }
+
+    public String getLoginPasswordParameterName() {
+        return this.loginPasswordParameterName;
+    }
+
+    public void setLoginPasswordParameterName(String loginPasswordParameterName) {
+        this.loginPasswordParameterName = loginPasswordParameterName;
+    }
+
+    public String getLoginUserName() {
+        return this.loginUserName;
+    }
+
+    public void setLoginUserName(String loginUserName) {
+        this.loginUserName = loginUserName;
+    }
+
+    public String getLoginPassword() {
+        return this.loginPassword;
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
+
+    public URL getTargetURL() {
+        return this.targetURL;
+    }
+
+    public void setTargetURL(String url) throws MalformedURLException {
+	if (url.substring(0, 7).equals("http://")) {
+		this.targetURL = new URL(url);
+	    } else {
+		this.targetURL = new URL("http://" + url);
+	    }
     }
 
     /**
@@ -24,12 +114,12 @@ public class Connection {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public String getSite(String url) throws MalformedURLException, IOException {
+    public String getSite() throws MalformedURLException, IOException {
 	String code = "";
 	InputStream is = null;
 
-	URL url2 = new URL(url);
-	is = url2.openStream(); // = openConnection().getInputStream();
+	
+	is = this.targetURL.openStream(); // = openConnection().getInputStream();
 	code = new Scanner(is).useDelimiter("\\Z").next();
 
 	if (is != null) {
@@ -38,5 +128,7 @@ public class Connection {
 
 	return code;
     }
+
+    
 
 }

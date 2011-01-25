@@ -24,11 +24,8 @@ public class UI {
 		running = false;
 	    } else {
 		try {
-		    if (input.substring(0, 7).equals("http://")) {
-			System.out.println(con.getSite(input));
-		    } else {
-			System.out.println(con.getSite("http://" + input));
-		    }
+		    con.setTargetURL(input);
+		    System.out.println(con.getSite());
 		} catch (MalformedURLException e) {
 		    System.out.println("Falsche Eingabe");
 		} catch (IOException e) {
